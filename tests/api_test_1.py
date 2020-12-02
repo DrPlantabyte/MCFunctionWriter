@@ -7,15 +7,15 @@ from mcfunctions.mc16.commands import *
 print('Testing high-level API v0.1')
 
 mcfunctions.set_output(sys.stdout) # default: print output
-mcfunctions.set_output(None) # no output
-mcfunctions.set_output('myfunction.mcfuntion') # append/create file
-fh = open('myfunction2.mcfuntion','w')
-mcfunctions.set_output(fh) # use provided output stream
+# mcfunctions.set_output(None) # no output
+# mcfunctions.set_output('myfunction.mcfuntion') # append/create file
+#fh = open('myfunction2.mcfuntion','w')
+#mcfunctions.set_output(fh) # use provided output stream
 
 text = ''
 text += say('Regroup!')
 text += teleport('@a', (0, '~', 0)) # all commands return string and write to set source
-fill(('~-3', '~', '~-3'), ('~3', '~3', '~3'), 'glass', dest='keep')
+fill(('~-3', '~-1', '~-3'), ('~3', '~3', '~3'), 'glass', dest='keep')
 fill(('~-2', '~', '~-2'), ('~2', '~2', '~2'), 'air')
 setblock(('~', '~4', '~'), 'glowstone', dest='destroy')
 tp('@r', ('~', '~5', '~'))
@@ -40,4 +40,4 @@ add_forceload((0,0), to=(30,30))
 remove_forceload((0,0), to=(30,30))
 remove_all_forceloads()
 
-fh.close()
+#fh.close()
