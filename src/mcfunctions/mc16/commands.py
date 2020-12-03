@@ -126,7 +126,9 @@ def give(target, item, data=None, count=None):
 def kill(target):
 	return mcfunctions.write_output('kill %s' % target)
 def spreadplayers(center, spreadDistance, maxRange, respectTeams=True, target='@a'):
-	return mcfunctions.write_output('spreadplayers %s %s %s %s %s' % (center, spreadDistance, maxRange, str(bool(respectTeams)).lower(), target))
+	if len(Pos(center)) != 2:
+		raise ValueError('Error: %s is invalid for this argument. You must use 2D (X,Z) coordinate' % center)
+	return mcfunctions.write_output('spreadplayers %s %s %s %s %s' % (Pos(center), spreadDistance, maxRange, str(bool(respectTeams)).lower(), target))
 def clear(target, item=None, maxCount=None):
 	command = 'clear %s' % target
 	if item is not None:
@@ -158,5 +160,34 @@ def effect_clear(target, effect=None):
 		return mcfunctions.write_output('effect clear %s' % target)
 	else:
 		return mcfunctions.write_output('effect clear %s %s' % (target, effect))
+def enchant(target, enchantment, level=None):
+	command = 'enchant %s %s' % (target, enchantment)
+	if level is not None:
+		command += ' %s' % str(int(level))
+	return mcfunctions.write_output(command)
+def forceload_add(from_pos, to=None):
+	if len(Pos(from_pos)) != 2:
+		raise ValueError('Error: %s is invalid for this argument. You must use 2D (X,Z) coordinate' % from_pos)
+	if to is None:
+		if len(Pos(to)) != 2:
+			raise ValueError('Error: %s is invalid for this argument. You must use 2D (X,Z) coordinate' % to)
+		return mcfunctions.write_output('forceload add %s' % Pos(from_pos))
+	else:
+		return mcfunctions.write_output('forceload add %s %s' % (Pos(from_pos), Pos(to)))
+def forceload_remove(from_pos, to=None):
+	if len(Pos(from_pos)) != 2:
+		raise ValueError('Error: %s is invalid for this argument. You must use 2D (X,Z) coordinate' % from_pos)
+	if str(from_pos).lower() == 'all':
+		return forceload_remove_all()
+	if to is None:
+		if len(Pos(to)) != 2:
+			raise ValueError('Error: %s is invalid for this argument. You must use 2D (X,Z) coordinate' % to)
+		return mcfunctions.write_output('forceload remove %s' % Pos(from_pos))
+	else:
+		return mcfunctions.write_output('forceload remove %s %s' % (Pos(from_pos), Pos(to)))
+def forceload_remove_all():
+	return mcfunctions.write_output('forceload remove all')
+
+
 
 # TODO: minecraft commands

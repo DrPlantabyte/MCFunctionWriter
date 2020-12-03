@@ -7,7 +7,7 @@ from sys import stdout, stderr
 
 def _init():
 	global _output_filestream
-	_output_filestream = stdout
+	_output_filestream = None
 
 # I/O methods
 def set_output(destination):
@@ -18,18 +18,25 @@ def set_output(destination):
 	if destination is None:
 		_output_filestream = None
 		return
-	if hasattr(destination, 'write'):
+	if callable(destination):
+		# destination is a function (eg print)
+		_output_filestream = destination
+	elif hasattr(destination, 'write'):
 		_output_filestream = destination
 	else:
 		_output_filestream = open(destination, 'w')
 	return _output_filestream
 def write_output(line):
+	new_line = '%s\n' % line
 	global _output_filestream
 	if _output_filestream is not None:
-		_output_filestream.write('%s\n' % line)
-		if hasattr(_output_filestream, 'flush'):
-			_output_filestream.flush()
-	return line
+		if callable(_output_filestream):
+			_output_filestream(line)
+		else:
+			_output_filestream.write(new_line)
+			if hasattr(_output_filestream, 'flush'):
+				_output_filestream.flush()
+	return new_line
 
 #####
 _init()
