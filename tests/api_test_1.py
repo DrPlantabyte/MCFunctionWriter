@@ -3,8 +3,9 @@
 import sys
 import mcfunctions
 from mcfunctions.mc16.commands import *
+from mcfunctions.mc16.util import *
 
-print('Testing high-level API v0.1')
+print('# Testing high-level API v0.1')
 
 mcfunctions.set_output(sys.stdout) # default: print output
 # mcfunctions.set_output(None) # no output
@@ -19,7 +20,7 @@ fill(('~-3', '~-1', '~-3'), ('~3', '~3', '~3'), 'glass', dest='keep')
 fill(('~-2', '~', '~-2'), ('~2', '~2', '~2'), 'air')
 setblock(('~', '~4', '~'), 'glowstone', dest='destroy')
 tp('@r', ('~', '~5', '~'))
-new_scoreboard(name='highscore', criteria='dummy', displayname='High Score', setdisplay='sidebar')
+new_scoreboard(scorename='highscore', criteria='dummy', displayname='High Score', setdisplay='sidebar')
 set_score(scoreboard='highscore', targets='@a', amount=0)
 add_score(scoreboard='highscore', targets='@a', amount=1)
 remove_scoreboard('highscore')
