@@ -29,6 +29,7 @@ def write_output(line):
 		_output_filestream.write('%s\n' % line)
 		if hasattr(_output_filestream, 'flush'):
 			_output_filestream.flush()
+	return line
 
 #####
 _init()

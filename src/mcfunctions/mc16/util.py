@@ -1,10 +1,10 @@
 from .commands import *
 
-def new_scoreboard(score_name, criteria='dummy', displayname=None, setdisplay=None):
+def new_scoreboard(name, criteria='dummy', displayname=None, setdisplay=None):
 	commands = []
-	commands.append(scoreboard_new(score_name=score_name, criteria=criteria, displayname=displayname))
+	commands.append(scoreboard_new(scoreboard=name, criteria=criteria, displayname=displayname))
 	if setdisplay is not None:
-		commands.append(scoreboard_setdisplay(score_name=score_name, setdisplay=setdisplay))
+		commands.append(scoreboard_setdisplay(scoreboard=name, setdisplay=setdisplay))
 	return '\n'.join(commands)
 
 def sphere(center, radius):
