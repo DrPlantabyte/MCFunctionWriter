@@ -4,7 +4,7 @@ def new_scoreboard(name, criteria='dummy', displayname=None, setdisplay=None):
 	commands = []
 	commands.append(scoreboard_new(scoreboard=name, criteria=criteria, displayname=displayname))
 	if setdisplay is not None:
-		commands.append(scoreboard_setdisplay(scoreboard=name, setdisplay=setdisplay))
+		commands.append(scoreboard_setdisplay(scoreboard=name, display=setdisplay))
 	return '\n'.join(commands)
 
 def sphere(center, radius):

@@ -82,7 +82,7 @@ def spawnpoint(selector, pos, angle=None):
 			a += 360
 		while a > 180:
 			a -= 360
-		command += ' %.3f' % str(a)
+		command += ' %.3f' % a
 	return mcfunctions.write_output(command)
 def tell(selector, message):
 	return mcfunctions.write_output('tell %s %s'%(selector, message))
@@ -109,6 +109,23 @@ def gamerule(rule, setting):
 	else:
 		sstr = 'false'
 	return mcfunctions.write_output('gamerule %s %s' % (rule, sstr))
-
+def give(selector, item, data=None, count=None):
+	istr = item
+	if data is not None:
+		if type(data) == str:
+			if data.strip()[0] != '{':
+				istr += '{%s}' % data.strip()
+			else:
+				istr += data.strip()
+		else:
+			istr += json.dumps(data)
+	if count is not None:
+		return mcfunctions.write_output('give %s %s %s' % (selector, istr, count))
+	else:
+		return mcfunctions.write_output('give %s %s' % (selector, istr))
+def kill(selector):
+	return mcfunctions.write_output('kill %s' % selector)
+def spreadplayers(center, spread_distance, max_range, respect_teams=True, selector='@a'):
+	return mcfunctions.write_output('spreadplayers %s %s %s %s %s' % (center, spread_distance, max_range, str(bool(respect_teams)).lower(), selector))
 
 # TODO: minecraft commands
