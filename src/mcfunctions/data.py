@@ -76,6 +76,15 @@ class NumVal:
 		cp = self.copy()
 		cp.val = int(cp.val)
 		return cp
+	def __eq__(self, other):
+		if type(other) == NumVal:
+			return self.val == other.val and self.is_relative == other.is_relative
+		elif type(other) == int:
+			return int(self.val) == other
+		elif type(other) == float:
+			return float(self.val) == other
+		else:
+			return False
 class Pos:
 	def __init__(self, *args):
 		self.x = 0

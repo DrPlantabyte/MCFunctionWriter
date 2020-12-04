@@ -24,6 +24,8 @@ def set_output(destination):
 	elif hasattr(destination, 'write'):
 		_output_filestream = destination
 	else:
+		if not str(destination).endswith('.mcfunction'):
+			destination = str(destination) + '.mcfunction'
 		_output_filestream = open(destination, 'w')
 	return _output_filestream
 def write_output(line):
