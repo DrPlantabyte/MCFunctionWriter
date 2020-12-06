@@ -56,6 +56,8 @@ def sphere(center, radius, block, blockstate=None):
 	return '\n'.join(commands)
 
 def place_command_block(pos, command, facing='down', conditional=False, type='impulse'):
+	# "Conditional": A command block in conditional mode executes its command only when the command block behind it has executed successfully ("Success count" is greater than 0).
+	# setblock ~1 ~1 ~1 minecraft:command_block[facing=up,conditional=true] replace
 	# TODO
 	raise Exception('W.I.P.')
 def place_impulse_command_block(pos, command, facing='down', conditional=False):
