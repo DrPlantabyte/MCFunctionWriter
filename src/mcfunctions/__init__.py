@@ -1,5 +1,5 @@
 # version info
-VERSION='0.1.0'
+VERSION='0.1.1'
 MAJOR, MINOR, BUILD = VERSION.split('.')
 
 # imports

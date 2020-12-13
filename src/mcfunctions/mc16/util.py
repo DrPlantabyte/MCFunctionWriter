@@ -66,3 +66,19 @@ def place_chain_command_block(pos, command, facing='down', conditional=False):
 	return place_command_block(pos=pos, command=command, facing=facing, conditional=conditional, type='chain')
 def place_repeating_command_block(pos, command, facing='down', conditional=False):
 	return place_command_block(pos=pos, command=command, facing=facing, conditional=conditional, type='repeat')
+def place_mob_spawner(pos, entityID, entitydata={}, SpawnRange=4, SpawnCount=4,MaxNearbyEntities=6,
+		Delay=299,MinSpawnDelay=200,MaxSpawnDelay=800,
+		RequiredPlayerRange=16):
+	# /setblock ~ ~1 ~ spawner{SpawnData:{id:zombie},Delay:299} replace
+	# /setblock ~ ~1 ~ spawner{SpawnData:{id:zombie,ArmorItems:[{},{},{},{Count:1,id:carved_pumpkin}],ArmorDropChances:[0.0f,0.0f,0.0f,0.2f]},SpawnRange:5,SpawnCount:5,MaxNearbyEntities:7,Delay:300,MinSpawnDelay:201,MaxSpawnDelay:801,RequiredPlayerRange:17} replace
+	edata={'id':entityID, **entitydata}
+	bdata = {
+		'SpawnData':edata,
+		'SpawnRange':SpawnRange,
+		'SpawnCount':SpawnCount,
+		'MaxNearbyEntities':MaxNearbyEntities,
+		'Delay':Delay,
+		'MinSpawnDelay':MinSpawnDelay,
+		'MaxSpawnDelay':MaxSpawnDelay,
+		'RequiredPlayerRange':RequiredPlayerRange}
+	return setblock(pos=pos, data=bdata)
